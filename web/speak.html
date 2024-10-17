@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyTorch: A Comprehensive Overview</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="slide">
+    <h2>Title Slide</h2>
+    <p><strong>Title:</strong> PyTorch: A Comprehensive Overview</p>
+    <div class="speaker-notes">
+        <p>"Today, I'll be discussing PyTorch, a powerful deep learning framework that has gained significant traction in both academia and industry. PyTorch was initially released by Facebook's AI Research lab in October 2016, with key contributions from Soumith Chintala, Adam Paszke, and Gregory Chanan."</p>
+    </div>
+</div>
+
+<div class="slide">
+    <h2>Organization Background</h2>
+    <div class="speaker-notes">
+        <p>"PyTorch was founded in 2016 under Facebook's AI Research lab. The mission behind PyTorch is to provide a flexible and efficient platform for deep learning research and application development. The vision is to democratize AI, making it accessible to researchers and developers across various domains."</p>
+    </div>
+</div>
+
+<!-- Add more slides similarly -->
+
+<div class="speech-controls">
+    <button onclick="startPauseSpeech()">Start/Pause</button>
+    <button onclick="stopSpeech()">Stop</button>
+</div>
+
+<script>
+    let currentUtterance = null;
+
+    function readSpeakerNotes(button) {
+        const slide = button.parentElement;
+        const speakerNotes = slide.querySelector('.speaker-notes');
+        const text = speakerNotes.innerText;
+
+        currentUtterance = new SpeechSynthesisUtterance(text);
+        currentUtterance.lang = 'en-US';
+        currentUtterance.rate = 1.0; // Adjust the speaking rate if needed
+
+        window.speechSynthesis.speak(currentUtterance);
+    }
+
+    function startPauseSpeech() {
+        if (currentUtterance && window.speechSynthesis.speaking) {
+            if (window.speechSynthesis.paused) {
+                window.speechSynthesis.resume();
+            } else {
+                window.speechSynthesis.pause();
+            }
+        } else {
+            const activeSlide = document.querySelector('.slide:not(.hidden)');
+            if (activeSlide) {
+                const speakerNotes = activeSlide.querySelector('.speaker-notes');
+                if (speakerNotes) {
+                    readSpeakerNotes({ parentElement: activeSlide });
+                }
+            }
+        }
+    }
+
+    function stopSpeech() {
+        if (currentUtterance) {
+            window.speechSynthesis.cancel();
+            currentUtterance = null;
+        }
+    }
+</script>
+
+</body>
+</html>

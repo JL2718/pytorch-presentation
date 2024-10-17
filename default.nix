@@ -1,5 +1,5 @@
 # default.nix
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs>{} }:
 
 pkgs.mkShell {
   buildInputs = with pkgs; [
@@ -7,10 +7,17 @@ pkgs.mkShell {
       # select Python packages here
       torch
       torchvision
+      torchaudio
       tensorboard
+      torch-tb-profiler
       ipywidgets
+      matplotlib
+      plotly
+      ipykernel
     ]))
-    pipenv
     jupyter
+    pipenv
+    quarto
+    graphviz
   ];
 }

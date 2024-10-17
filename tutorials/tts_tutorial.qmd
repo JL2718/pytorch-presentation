@@ -1,0 +1,99 @@
+```markdown
+---
+title: "Text to Speech with Torchaudio in Quarto"
+author: "Your Name"
+date: "2023-10-05"
+format: html
+jupyter: python3
+---
+
+# Introduction
+
+In this tutorial, we will explore how to use `torchaudio` to convert text to speech (TTS). `torchaudio` is a PyTorch library that provides audio processing capabilities, including TTS models. We will use a pre-trained TTS model to synthesize speech from text.
+
+# Prerequisites
+
+Before we begin, make sure you have the following installed:
+
+- Python 3.7+
+- PyTorch
+- Torchaudio
+- Quarto
+
+You can install the required packages using pip:
+
+```bash
+pip install torch torchaudio
+```
+
+# Step 1: Import Required Libraries
+
+First, let's import the necessary libraries. We will use `torchaudio` for TTS and `IPython.display` to play the generated audio.
+
+```python
+import torch
+import torchaudio
+from IPython.display import Audio
+```
+
+# Step 2: Load a Pre-trained TTS Model
+
+Torchaudio provides several pre-trained TTS models. For this tutorial, we will use the Tacotron 2 model, which is a popular TTS model.
+
+```python
+# Load the Tacotron 2 model
+tts_model, example_text = torchaudio.load_text_to_speech_model("tacotron2")
+```
+
+# Step 3: Prepare the Input Text
+
+Next, we need to prepare the input text that we want to convert to speech. The input text should be a string.
+
+```python
+# Input text
+text = "Hello, this is a demonstration of text to speech using Torchaudio."
+```
+
+# Step 4: Generate Mel Spectrogram
+
+The Tacotron 2 model generates a mel spectrogram from the input text. We will use the model to generate this spectrogram.
+
+```python
+# Generate mel spectrogram
+spectrogram = tts_model.generate_spectrogram(text)
+```
+
+# Step 5: Convert Mel Spectrogram to Audio
+
+Once we have the mel spectrogram, we can convert it to an audio waveform using a vocoder. Torchaudio provides a pre-trained WaveGlow vocoder, which we will use here.
+
+```python
+# Load the WaveGlow vocoder
+vocoder = torchaudio.load_vocoder("waveglow")
+
+# Convert mel spectrogram to audio waveform
+waveform = vocoder(spectrogram)
+```
+
+# Step 6: Play the Generated Audio
+
+Finally, we can play the generated audio using `IPython.display.Audio`.
+
+```python
+# Play the audio
+Audio(waveform.numpy(), rate=22050)
+```
+
+# Conclusion
+
+In this tutorial, we learned how to use `torchaudio` to convert text to speech. We loaded a pre-trained Tacotron 2 model, generated a mel spectrogram from text, and then converted the spectrogram to an audio waveform using a WaveGlow vocoder. The generated audio was played using `IPython.display.Audio`.
+
+You can now experiment with different texts and models to create your own TTS applications.
+
+# References
+
+- [Torchaudio Documentation](https://pytorch.org/audio/stable/index.html)
+- [Tacotron 2 Paper](https://arxiv.org/abs/1712.05884)
+- [WaveGlow Paper](https://arxiv.org/abs/1811.00002)
+
+This Quarto document provides a step-by-step guide to using `torchaudio` for text-to-speech synthesis. You can render this document using Quarto to generate an HTML or PDF output.

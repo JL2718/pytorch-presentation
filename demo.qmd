@@ -1,4 +1,3 @@
-```markdown
 ---
 title: "PyTorch Tutorial"
 output: html_notebook
@@ -169,4 +168,3 @@ print('Convergence Delta:', delta)
 # Conclusion
 
 This tutorial demonstrated how to use several key features of PyTorch, including `autograd`, `DataLoader`, `TensorBoard`, `profiler`, `TorchScript`, `quantization`, and `Captum`. Each of these features plays a crucial role in developing, optimizing, and interpreting deep learning models.
-```

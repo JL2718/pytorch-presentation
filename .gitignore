@@ -3,3 +3,5 @@ data
 runs
 __pycache__
 .ipynb_checkpoints
+runs
+demo_files
